@@ -1,0 +1,63 @@
+﻿@model IEnumerable<EmpresaDistribuidora.Models.Producto>
+
+@{
+    ViewData["Title"] = "Inicio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+	<div class="row">
+        <h1>Productos</h1>
+        <form class="form-inline">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="Clave" class="col-form-label">Clave de Producto:</label>
+                    <input type="text" id="Clave" name="Clave" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg">Buscar</button>
+            </div>
+        </form>
+
+     
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NombreProducto)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Clave)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Precio)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+        @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreProducto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Clave)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Precio)
+                    </td>
+                   
+                    <td>
+                        <a class="btn btn-primary btn-sm" asp-action="Editar" asp-controller="Producto" asp-route-productoId="@item.ProductoId">Edit</a>
+                        <a class="btn btn-danger btn-sm" asp-action="Eliminar" asp-controller="Producto" asp-route-productoId="@item.ProductoId">Eliminar</a>
+                    </td>
+                </tr>
+        }       
+            </tbody>
+        </table>
+
+    </div>
+    <a asp-action="Registrar" class="btn btn-success">Crear Producto</a>
+</div>

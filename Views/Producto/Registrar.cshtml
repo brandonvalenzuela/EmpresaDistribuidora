@@ -1,0 +1,69 @@
+﻿@model EmpresaDistribuidora.Models.Producto
+@{
+    ViewData["Title"] = "Registrar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div  class="row" style="margin-top:30px">
+    <div class="col-sm-12">
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4>Nuevo Producto</h4>
+
+            </div>
+            <div class="panel-body">
+
+                <form method="post" asp-action="Registrar" class="mt-3" autocomplete="off">
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" class="form-control" asp-for="NombreProducto" placeholder="Nombre" required />
+                        <span asp-validation-for="NombreProducto" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Clave</label>
+                        <input type="text" class="form-control" asp-for="Clave" placeholder="Clave" required />
+                        <span asp-validation-for="Clave" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Tipo Producto</label>
+                        <select class="form-control" asp-for="CategoriaId" required>
+                            <option value="">Seleccione</option>
+                            <option value="1">Electrónicos</option>
+                            <option value="2">Alimentos</option>
+                            <option value="3">Moda</option>
+                            <option value="4">Hogar</option>
+                            <option value="5">Jardinería</option>
+                        </select>
+                        <span asp-validation-for="CategoriaId" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Precio</label>
+                        <input type="text" class="form-control" asp-for="Precio" placeholder="Precio" required />
+                        <span asp-validation-for="Precio" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-check">
+                        <label class="form-check-label" for="EsActivo">Es Activo</label>
+                        <input class="form-check-input" type="checkbox" asp-for="EsActivo" />
+                        <span asp-validation-for="EsActivo" class="text-danger"></span>
+                    </div>
+
+
+                    <Button type="submit" asp-action="Registrar" class="btn btn-success">Crear Producto</Button>
+                    <a asp-action="Inicio" class="btn btn-warning">Volver</a>
+
+
+                </form>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
