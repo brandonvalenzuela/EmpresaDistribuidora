@@ -8,6 +8,7 @@ namespace EmpresaDistribuidora.Controllers
     public class ProductoController : Controller
     {
 
+        
         private readonly string connectionString;
 
         private static List<Producto> productoList = new();
@@ -22,7 +23,7 @@ namespace EmpresaDistribuidora.Controllers
             var configuration = coonfigurationBuilder.Build();
             connectionString = configuration.GetConnectionString("DefaultConnection");
         }
-
+        
 
         [HttpGet]
         public IActionResult Inicio(string Clave)
@@ -50,7 +51,7 @@ namespace EmpresaDistribuidora.Controllers
 
                     if (!string.IsNullOrEmpty(Clave))
                     {
-                        productoList = productoList.Where(p => p.Clave.StartsWith(Clave, StringComparison.OrdinalIgnoreCase)).ToList();
+                        productoList = productoList.Where(p => p.Clave.StartsWith(Clave)).ToList();
                     }
 
                 }
@@ -58,7 +59,6 @@ namespace EmpresaDistribuidora.Controllers
             return View(productoList);
         }
 
-        /*-----------------------------------------------------------------------------*/
 
         [HttpGet]
         public  IActionResult Registrar()
@@ -88,7 +88,6 @@ namespace EmpresaDistribuidora.Controllers
 
         }
 
-        /*--------------------------------------------------------------*/
 
         [HttpGet]
         public IActionResult Editar(int? productoId)
@@ -120,8 +119,6 @@ namespace EmpresaDistribuidora.Controllers
 
         }
 
-
-        /*---------------------------------------------*/
 
         [HttpGet]
         public IActionResult Eliminar(int? productoId)

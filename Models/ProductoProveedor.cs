@@ -1,4 +1,6 @@
-﻿namespace EmpresaDistribuidora.Models
+﻿using System.ComponentModel;
+
+namespace EmpresaDistribuidora.Models
 {
     public class ProductoProveedor
     {

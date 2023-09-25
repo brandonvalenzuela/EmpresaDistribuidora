@@ -1,4 +1,5 @@
 using EmpresaDistribuidora.Controllers;
+using EmpresaDistribuidora.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

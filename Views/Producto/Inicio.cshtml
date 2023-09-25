@@ -50,14 +50,22 @@
                     </td>
                    
                     <td>
-                        <a class="btn btn-primary btn-sm" asp-action="Editar" asp-controller="Producto" asp-route-productoId="@item.ProductoId">Edit</a>
-                        <a class="btn btn-danger btn-sm" asp-action="Eliminar" asp-controller="Producto" asp-route-productoId="@item.ProductoId">Eliminar</a>
+                        <a class="btn btn-primary btn-sm" asp-action="Editar" asp-controller="Producto" asp-route-productoId="@item.ProductoId" data-toggle="modal" data-target="#myModal" data-backdrop="static">Edit</a>
+                        <a class="btn btn-danger btn-sm" asp-action="Eliminar" asp-controller="Producto" asp-route-productoId="@item.ProductoId" data-toggle="modal" data-target="#myModal" data-backdrop="static">Eliminar</a>
                     </td>
                 </tr>
         }       
             </tbody>
         </table>
-
+        <a asp-action="Registrar" class="btn btn-success">Crear Producto</a>
     </div>
-    <a asp-action="Registrar" class="btn btn-success">Crear Producto</a>
 </div>
+
+    <!-- Modal -->
+<div id="myModal" class="modal fade flex" role="dialog">
+    <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                
+            </div>
+        </div>
+    </div>
