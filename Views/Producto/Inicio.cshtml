@@ -13,7 +13,20 @@
                     <label for="Clave" class="col-form-label">Clave de Producto:</label>
                     <input type="text" id="Clave" name="Clave" class="form-control" />
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg">Buscar</button>
+
+                <div class="col-md-6 mb-3">
+                    <label for="Categoria" class="col-form-label">Categoria:</label>
+                    <select type="text" id="Categoria" name="Categoria" class="form-control">
+                        <option value="">Seleccione</option>
+                        <option value="1">Electrónicos</option>
+                        <option value="2">Alimentos</option>
+                        <option value="3">Moda</option>
+                        <option value="4">Hogar</option>
+                        <option value="5">Jardinería</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg grid">Buscar</button>
             </div>
         </form>
 
@@ -61,11 +74,15 @@
     </div>
 </div>
 
+
+
+
+
     <!-- Modal -->
 <div id="myModal" class="modal fade flex" role="dialog">
     <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 
             </div>
-        </div>
     </div>
+</div>

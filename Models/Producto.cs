@@ -2,6 +2,10 @@
 {
     public class Producto
     {
+        public Producto()
+        {
+            ProductosProveedores = new List<ProductoProveedor>();
+        }
 
         public int ProductoId { get; set; }
 
@@ -16,7 +20,7 @@
         public bool EsActivo { get; set; }
 
         // Propiedad de navegación para la relación con Categoria
-        //public Categoria Categoria { get; set; }
+       // public Categoria Categoria { get; set; }
 
         // Colección de ProductosProveedores para la relación muchos a muchos
         public List<ProductoProveedor> ProductosProveedores { get; set; }
