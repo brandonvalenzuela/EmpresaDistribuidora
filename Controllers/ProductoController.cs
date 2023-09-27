@@ -116,7 +116,6 @@ namespace EmpresaDistribuidora.Controllers
                 command.ExecuteNonQuery();
             };
             return RedirectToAction("Inicio");
-
         }
 
 
