@@ -4,6 +4,8 @@
     {
         IEnumerable<Producto> _products { get; set; }
 
-        IEnumerable<Categoria> _categorias { get; set;}
+        IEnumerable<Categoria> _categorias { get; set; }
+
+        IEnumerable<Producto> _productos { get; set; }
     }
 }

@@ -3,38 +3,30 @@ using System.Data.SqlClient;
 using System.Data;
 using EmpresaDistribuidora.Models;
 using System.Xml.Linq;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-
+using Microsoft.Extensions.Options;
 
 namespace EmpresaDistribuidora.Controllers
 {
     public class ProductoController : Controller
     {
 
-        
-        private readonly string connectionString;
-
+        //private readonly string connectionString;
         private static List<Producto> productoList = new();
 
+        private readonly Data.Connection _connection;
 
-        public ProductoController()
+        public ProductoController(IOptions<Data.Connection> connection)
         {
-            // Obtener la cadena de conexión desde appsettings.json
-            var coonfigurationBuilder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json");
-
-            var configuration = coonfigurationBuilder.Build();
-            connectionString = configuration.GetConnectionString("DefaultConnection");
+            _connection = connection.Value;
         }
-
 
         [HttpGet]
         public IActionResult Inicio(string Clave, string Categoria)
         {
+
             productoList = new();
 
-            using (SqlConnection connection = new(connectionString))
+            using (SqlConnection connection = new(_connection.DefaultConnection))
             using (SqlCommand command = new("SELECT * FROM Producto", connection))
             {
                 command.CommandType = CommandType.Text;
@@ -59,11 +51,17 @@ namespace EmpresaDistribuidora.Controllers
                         productoList = productoList.Where(p => p.Clave.StartsWith(Clave)).ToList();
                         productoList = productoList.Where(p => p.CategoriaId.ToString().Contains(Categoria)).ToList();
                     }
+                    else if (string.IsNullOrEmpty(Clave) && !string.IsNullOrEmpty(Categoria))
+                    {
+                        productoList = productoList.Where(p => p.CategoriaId.ToString().Contains(Categoria)).ToList();
+
+                    }
 
                 }
             }
             return View(productoList);
         }
+       
 
 
         [HttpGet]
@@ -100,8 +98,8 @@ namespace EmpresaDistribuidora.Controllers
 
                 producto.Add(productoProveedor);
 
-                using (SqlConnection connection = new(connectionString)) { 
-                
+                using (SqlConnection connection = new(_connection.DefaultConnection)) { 
+
                     connection.Open();
                     SqlCommand command = new("[sp_Insert_ProductoProveedor]", connection);
                     command.Parameters.Add("Producto_xml", SqlDbType.Xml).Value = producto.ToString();
@@ -116,31 +114,6 @@ namespace EmpresaDistribuidora.Controllers
                 return Json(new { error = "Error en el servidor: " + ex.Message });
             }
         }
-        
-
-/*
-        [HttpPost]
-        public IActionResult Registrar(Producto producto)
-        {
-            using (SqlConnection connection = new(connectionString))
-            using (SqlCommand command = new("[sp_Insert_Producto]", connection))
-            {
-
-                command.Parameters.AddWithValue("NombreProducto", producto.NombreProducto);
-                command.Parameters.AddWithValue("Clave", producto.Clave);
-                command.Parameters.AddWithValue("Precio", producto.Precio);
-                command.Parameters.AddWithValue("CategoriaId", producto.CategoriaId);
-                command.Parameters.AddWithValue("EsActivo", producto.EsActivo);
-
-                command.CommandType = CommandType.StoredProcedure;
-
-                connection.Open();
-                command.ExecuteNonQuery();
-            };
-            return RedirectToAction("Inicio");
-
-        }
-        */
 
         [HttpGet]
         public IActionResult Editar(int? productoId)
@@ -156,7 +129,7 @@ namespace EmpresaDistribuidora.Controllers
         [HttpPost]
         public IActionResult Editar(Producto producto)
         {
-            using (SqlConnection connection = new(connectionString))
+            using (SqlConnection connection = new(_connection.DefaultConnection))
             using (SqlCommand command = new("[sp_Update_Producto]", connection))
             {
                 command.Parameters.AddWithValue("ProductoId", producto.ProductoId);    
@@ -185,7 +158,7 @@ namespace EmpresaDistribuidora.Controllers
         [HttpPost]
         public IActionResult Eliminar(string productoId)
         {
-            using (SqlConnection connection = new(connectionString))
+            using (SqlConnection connection = new(_connection.DefaultConnection))
             using (SqlCommand command = new("[sp_Delete_Producto]", connection))
             {
                 command.Parameters.AddWithValue("ProductoId", productoId);
@@ -197,7 +170,5 @@ namespace EmpresaDistribuidora.Controllers
             return RedirectToAction("Inicio");
 
         }
-
     }
-
 }

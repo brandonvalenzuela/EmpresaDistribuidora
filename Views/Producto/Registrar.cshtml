@@ -147,36 +147,31 @@
 
 @section Scripts{
     <script>
-
         function validarCamposProveedor(proveedor, claveProveedor, costoProveedor) {
-    // Define tus reglas de validación aquí
-    var error = false;
+            var error = false;
 
-    if (proveedor.trim() === "") {
-        $("#errorProveedor").text("Por favor, ingresa el nombre del proveedor.");
-        error = true;
-    } else {
-        $("#errorProveedor").text("");
-    }
+            if (proveedor.trim() === "") {
+                $("#errorProveedor").text("Por favor, ingresa el nombre del proveedor.");
+                error = true;
+            } else {
+                $("#errorProveedor").text("");
+            }
 
-    if (claveProveedor.trim() === "") {
-        $("#errorClaveProveedor").text("Por favor, ingresa la clave del proveedor.");
-        error = true;
-    } else {
-        $("#errorClaveProveedor").text("");
-    }
+            if (claveProveedor.trim() === "") {
+                $("#errorClaveProveedor").text("Por favor, ingresa la clave del proveedor.");
+                error = true;
+            } else {
+                $("#errorClaveProveedor").text("");
+            }
 
-    if (isNaN(parseFloat(costoProveedor))) {
-        $("#errorCostoProveedor").text("Por favor, ingresa un costo de proveedor válido.");
-        error = true;
-    } else {
-        $("#errorCostoProveedor").text("");
-    }
-
-    // Agrega más reglas de validación según tus necesidades
-
-    return !error;
-}
+            if (isNaN(parseFloat(costoProveedor))) {
+                $("#errorCostoProveedor").text("Por favor, ingresa un costo de proveedor válido.");
+                error = true;
+            } else {
+                $("#errorCostoProveedor").text("");
+            }
+            return !error;
+        }
 
 
         // Función para abrir el modal de agregar proveedor
@@ -190,13 +185,13 @@
             $("#agregarProveedorModal").modal("show");
         });
 
-        // Función para confirmar el proveedor desde el modal
+        // Confirmar el proveedor desde el modal
         $("#botonConfirmarProveedor").on("click", function () {
             var proveedor = $("#textoProveedorModal").val();
             var claveProveedor = $("#textoClaveProveedorModal").val();
             var costoProveedor = $("#textoCostoProveedorModal").val();
 
-            // Validar campos (puedes agregar tu lógica de validación aquí)
+            // Validar campos
             if (validarCamposProveedor(proveedor, claveProveedor, costoProveedor)) {
 
                 // Agregar fila a la tabla de proveedores en el formulario principal
@@ -207,7 +202,7 @@
                         $("<td>").text(costoProveedor),
                         $("<td>").append(
                             $("<button>").addClass("btn btn-danger").text("Eliminar").on("click", function () {
-                                // Agrega aquí la lógica para eliminar la fila de proveedor si es necesario
+                                // Eliminar la fila de proveedor
                                 $(this).closest("tr").remove();
                             })
                         )
@@ -238,19 +233,15 @@
             })
 
             var productoProveedor = {
-            NombreProducto: $("#textNombreProducto").val(),
-            Clave: $("#textClave").val(),
-            CategoriaId: parseInt($("#selectCategoria").val()), // Parsear a entero
-            Precio: parseFloat($("#textPrecio").val()), // Parsear a decimal
-            EsActivo: $("#checkboxEsActivo").prop("checked"), // Usar propiedad checked
-            ProductosProveedores: productoProveedorList
+                NombreProducto: $("#textNombreProducto").val(),
+                Clave: $("#textClave").val(),
+                CategoriaId: parseInt($("#selectCategoria").val()),
+                Precio: parseFloat($("#textPrecio").val()),
+                EsActivo: $("#checkboxEsActivo").prop("checked"),
+                ProductosProveedores: productoProveedorList
             }
 
-
             console.log(productoProveedor);
-
-
-            
 
             jQuery.ajax({
                 url: "@Url.Action("Registrar","Producto")",
