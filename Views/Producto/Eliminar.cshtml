@@ -5,25 +5,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container">
-    <div class="row align-items-end">
-        <div class="panel panel-warning">
-            <div class="panel-heading">
-                <h4>Eliminar Producto</h4>
+<div class="container-sm modal-dialog-centered">
+    <div class="row panel panel-warning">
+        <div class="panel-heading">
+            <h4>Eliminar Producto</h4>
+        </div>
+        <div class="panel-body">
+            <div class="alert alert-danger">
+                ¿Quiere eliminar el producto: @Html.DisplayTextFor(m => m.NombreProducto) ?
             </div>
-
-            <div class="panel-body">
-                <div class="alert alert-danger">
-                    ¿Quiere eliminar el producto: @Html.DisplayTextFor(m => m.NombreProducto) ?
-                </div>
-
-                <form asp-action="Eliminar" method="post">
-                    <input type="hidden" class="form-control" asp-for="ProductoId" placeholder="ProductoId" value="@Html.DisplayTextFor(m => m.ProductoId)" />
-
-                    <button type="submit" asp-action="Eliminar" class="btn btn-danger btn-sm">Eliminar Producto</button>
-                    <a asp-action="Inicio" class="btn btn-warning btn-sm">Volver</a>
-                </form>
-            </div>
+            <form asp-action="Eliminar" method="post">
+                <input type="hidden" class="form-control" asp-for="ProductoId" placeholder="ProductoId" value="@Html.DisplayTextFor(m => m.ProductoId)" />
+                <button type="submit" asp-action="Eliminar" class="btn btn-danger btn-sm">Eliminar Producto</button>
+                <a asp-action="Inicio" class="btn btn-warning btn-sm">Volver</a>
+            </form>
         </div>
     </div>
 </div>

@@ -9,8 +9,6 @@ namespace EmpresaDistribuidora.Controllers
 {
     public class ProductoController : Controller
     {
-
-        //private readonly string connectionString;
         private static List<Producto> productoList = new();
 
         private readonly Data.Connection _connection;
@@ -23,7 +21,6 @@ namespace EmpresaDistribuidora.Controllers
         [HttpGet]
         public IActionResult Inicio(string Clave, string Categoria)
         {
-
             productoList = new();
 
             using (SqlConnection connection = new(_connection.DefaultConnection))

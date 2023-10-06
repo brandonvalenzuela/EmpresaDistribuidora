@@ -6,53 +6,42 @@
 }
 
 
-<div class="container" style="margin-top:30px">
-    <div class="row aling-items-end">
-
-        <div class="panel panel-warning">
-            <div class="panel-heading">
-                <h4>Editar Producto</h4>
-
-            </div>
-
-            <div class="panel-body aling-items-end">
-                <form method="post" asp-action="Editar" class="mt-3">
-                    <input type="hidden" class="form-control" asp-for="ProductoId" placeholder="ProductoId" value="@Html.DisplayTextFor(m => m.ProductoId)" />
-
-                    <div class="mb-3">
-                        <label class="form-label">Nombre</label>
-                        <input type="text" class="form-control" asp-for="NombreProducto" placeholder="Nombre" value="@Html.DisplayTextFor(m => m.NombreProducto)" required/>
-                        <span asp-validation-for="NombreProducto" class="text-danger"></span>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Clave</label>
-                        <input type="text" class="form-control" asp-for="Clave" placeholder="Clave" value="@Html.DisplayTextFor(m => m.Clave)" required/>
-                        <span asp-validation-for="Clave" class="text-danger"></span>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Precio</label>
-                        <input type="text" class="form-control" asp-for="Precio" placeholder="Precio" value="@Html.DisplayTextFor(m => m.Precio)" required />
-                        <span asp-validation-for="Precio" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-check">
-                        <label class="form-check-label" for="EsActivo">Es Activo</label>
-                        <input class="form-check-input" type="checkbox" asp-for="EsActivo" required />
-                        <span asp-validation-for="EsActivo" class="text-danger"></span>
-                    </div>
-
-
-                    <Button type="submit" asp-action="Editar" class="btn btn-success">Guardar</Button>
-                    <a asp-action="Inicio" class="btn btn-warning">Volver</a>
-
-                </form>
-
-
-            </div>
-
-
+<div class="container-sm modal-dialog-centered">
+    <div class="row panel-warning">
+        <div class="panel-heading">
+            <h4>Editar Producto</h4>
         </div>
 
+        <div class="panel-body">
+            <form method="post" asp-action="Editar" class="mt-3">
+                <input type="hidden" class="form-control" asp-for="ProductoId" placeholder="ProductoId" value="@Html.DisplayTextFor(m => m.ProductoId)" />
+
+                <div class="mb-3">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" class="form-control" asp-for="NombreProducto" placeholder="Nombre" value="@Html.DisplayTextFor(m => m.NombreProducto)" required/>
+                    <span asp-validation-for="NombreProducto" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Clave</label>
+                    <input type="text" class="form-control" asp-for="Clave" placeholder="Clave" value="@Html.DisplayTextFor(m => m.Clave)" required/>
+                    <span asp-validation-for="Clave" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Precio</label>
+                    <input type="text" class="form-control" asp-for="Precio" placeholder="Precio" value="@Html.DisplayTextFor(m => m.Precio)" required />
+                    <span asp-validation-for="Precio" class="text-danger"></span>
+                </div>
+
+                <div class="form-check">
+                    <label class="form-check-label" for="EsActivo">Es Activo</label>
+                    <input class="form-check-input" type="checkbox" asp-for="EsActivo" required />
+                    <span asp-validation-for="EsActivo" class="text-danger"></span>
+                </div>
+
+                <Button type="submit" asp-action="Editar" class="btn btn-success">Guardar</Button>
+                <a asp-action="Inicio" class="btn btn-warning">Volver</a>
+            </form>
+        </div>
     </div>
 </div>

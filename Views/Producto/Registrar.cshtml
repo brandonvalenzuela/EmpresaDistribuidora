@@ -10,23 +10,19 @@
     </div>
 
     <div class="card-body">
-
         <div class="row aling-items-end">
             <div class="col-sm-4">
-
                 <div class="mb-2">
                     <label class="form-label">Nombre</label>
                     <input type="text" class="form-control" id="textNombreProducto" placeholder="Nombre Producto" required />
                     <span for="NombreProducto" class="text-danger"></span>
                 </div>
             </div>
-       
 
             <div class="col-sm-4">
-
                 <div class="mb-2">
                     <label class="form-label">Clave</label>
-                    <input type="text" class="form-control" id="textClave" placeholder="Clave" required />
+                    <input type="text" class="form-control" id="textClave" placeholder="Clave producto" required />
                     <span for="Clave" class="text-danger"></span>
                 </div>
             </div>
@@ -50,7 +46,7 @@
             <div class="col-sm-4">
                 <div class="mb-2">
                     <label class="form-label">Precio</label>
-                    <input type="text" class="form-control" placeholder="Precio" id="textPrecio" required />
+                    <input type="text" class="form-control" placeholder="Precio al consumidor" id="textPrecio" required />
                     <span for="Precio" class="text-danger"></span>
                 </div>
             </div>
@@ -62,8 +58,8 @@
                     <span for="EsActivo" class="text-danger"></span>
                 </div>
             </div>
-        </div>
 
+        </div>
 
         <div class="row">
             <div class="col-sm-12">
@@ -80,6 +76,7 @@
                     <tbody>
 
                     </tbody>
+
                 </table>
             </div>
         </div>
@@ -87,14 +84,13 @@
     </div>  
 </div>
 
-<div class="col-sm-3">
-    <button type="button" class="btn btn-primary mb-2 btn-sm" data-toggle="modal" data-target="#agregarProveedorModal">
-        Agregar Proveedor
-    </button>
-    <button type="submit" asp-action="Registrar" class="btn btn-success mb-2 btn-sm" id="buttonGuardarProducto">Guardar</button>
+<div class="form-inline pt-5">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <button type="button" class="btn btn-primary mb-2 btn-sm me-auto" data-toggle="modal" data-target="#agregarProveedorModal">Agregar Proveedor</button>
+        <button type="submit" asp-action="Registrar" class="btn btn-success mb-2 btn-sm" id="buttonGuardarProducto">Guardar</button>
+        <a asp-action="Inicio" class="btn btn-warning mb-2 btn-sm">Volver</a>
+    </div>
 </div>
-
-<!-- Botón para abrir el modal -->
 
 <!-- Modal -->
 <div class="modal fade" id="agregarProveedorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -103,8 +99,8 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Agregar Proveedor</h5>
             </div>
+
             <div class="modal-body">
-                <!-- Formulario para agregar proveedor -->
                 <div class="mb-2">
                     <label class="form-check-label" for="textoProveedorModal">Proveedor</label>
                     <select class="form-control" id="textoProveedorModal" required>
@@ -136,6 +132,7 @@
 
                 </div>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-primary" id="botonConfirmarProveedor">Confirmar</button>
@@ -173,9 +170,9 @@
             return !error;
         }
 
-
-        // Función para abrir el modal de agregar proveedor
+        // abrir el modal de agregar proveedor
         $("#buttonAgregarProveedor").on("click", function () {
+
             // Limpiar campos del modal
             $("#textoProveedorModal").val("");
             $("#textoClaveProveedorModal").val("");
@@ -262,8 +259,6 @@
                 }
             });
         })
-
-   
     </script>
 } 
  

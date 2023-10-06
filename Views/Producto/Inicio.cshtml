@@ -5,17 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container">
-	<div class="row">
+	<div class="row pt-5">
         <h1>Productos</h1>
-        <form class="form-inline">
+        <form class="form-inline pt-5 pb-5">
             <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="Clave" class="col-form-label">Clave de Producto:</label>
+                <div class="col-md-5">
+                    <label for="Clave" class="form-label">Clave de Producto:</label>
                     <input type="text" id="Clave" name="Clave" class="form-control" />
                 </div>
 
-                <div class="col-md-6 mb-3">
-                    <label for="Categoria" class="col-form-label">Categoria:</label>
+                <div class="col-md-3">
+                    <label for="Categoria" class="form-label">Categoria:</label>
                     <select type="text" id="Categoria" name="Categoria" class="form-control">
                         <option value="">Seleccionar</option>
                         <option value="1">Electrónicos</option>
@@ -24,9 +24,9 @@
                         <option value="4">Hogar</option>
                         <option value="5">Jardinería</option>
                     </select>
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-lg grid">Buscar</button>
+                </div>          
+                
+                <button type="submit" class="btn btn-primary col-sm-2">Buscar</button>
             </div>
         </form>
 
@@ -47,6 +47,7 @@
             </thead>
 
             <tbody>
+
         @foreach (var item in Model) {
                 <tr>
                     <td>
@@ -67,15 +68,22 @@
         }       
             </tbody>
         </table>
-        <a asp-action="Registrar" class="btn btn-success">Crear Producto</a>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end pt-5">
+            <a asp-action="Registrar" class="btn btn-success">Crear Producto</a>
+        </div>
     </div>
 </div>
 
     <!-- Modal -->
-<div id="myModal" class="modal">
-    <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="container-sm">
+                <div class="modal-body">
+                   
+                </div>          
             </div>
+        </div>
     </div>
 </div>
