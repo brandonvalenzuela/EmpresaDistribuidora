@@ -4,6 +4,8 @@ using System.Data;
 using EmpresaDistribuidora.Models;
 using System.Xml.Linq;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using EmpresaDistribuidora.Services;
 
 namespace EmpresaDistribuidora.Controllers
 {
@@ -11,11 +13,18 @@ namespace EmpresaDistribuidora.Controllers
     {
         private static List<Producto> productoList = new();
 
+        private static List<SelectListItem> categoriasList = new();
+
+        private static List<SelectListItem> proveedorList = new();
+
+        private readonly ProductoService _productoService;
+
         private readonly Data.Connection _connection;
 
-        public ProductoController(IOptions<Data.Connection> connection)
+        public ProductoController(IOptions<Data.Connection> connection, ProductoService productoService)
         {
             _connection = connection.Value;
+            _productoService = productoService;
         }
 
         [HttpGet]
@@ -53,57 +62,38 @@ namespace EmpresaDistribuidora.Controllers
                         productoList = productoList.Where(p => p.CategoriaId.ToString().Contains(Categoria)).ToList();
 
                     }
-
                 }
             }
+
+            categoriasList = _productoService.GetCategoriasFromDatabase();
+
+            ViewData["Categorias"] = categoriasList;
+
             return View(productoList);
         }
-       
-
 
         [HttpGet]
         public  IActionResult Registrar()
         {
+            proveedorList = _productoService.GetProveedoresFromDatabase();
+
+            categoriasList = _productoService.GetCategoriasFromDatabase();
+
+            ViewData["Proveedor"] = proveedorList;
+            ViewData["Categorias"] = categoriasList;
+
             return View();
         }
-
 
         [HttpPost]
         public JsonResult Registrar([FromBody] Producto body)
         {
             try
             {
-                XElement producto = new XElement("Producto",
+                XElement producto = _productoService.CreateProductoXml(body);
 
-                       new XElement("NombreProducto", body.NombreProducto),
-                       new XElement("Clave", body.Clave),
-                       new XElement("CategoriaId", body.CategoriaId),
-                       new XElement("Precio", body.Precio),
-                       new XElement("EsActivo", body.EsActivo)
-                       );
+                _productoService.InsertProductoXmlIntoDatabase(producto);
 
-                XElement productoProveedor = new("ProductoProveedor");
-
-                foreach (ProductoProveedor item in body.ProductosProveedores)
-                {
-                    productoProveedor.Add(new XElement("Item",
-                        new XElement("ProveedorId", item.ProveedorId),
-                        new XElement("ClaveProveedor", item.ClaveProveedor),
-                        new XElement("PrecioProveedor", item.PrecioProveedor)
-                        ));
-                }
-
-                producto.Add(productoProveedor);
-
-                using (SqlConnection connection = new(_connection.DefaultConnection)) { 
-
-                    connection.Open();
-                    SqlCommand command = new("[sp_Insert_ProductoProveedor]", connection);
-                    command.Parameters.Add("Producto_xml", SqlDbType.Xml).Value = producto.ToString();
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.ExecuteNonQuery();
-
-                }
                 return Json(new { respuesta = true });
             }
             catch (Exception ex)
@@ -140,7 +130,6 @@ namespace EmpresaDistribuidora.Controllers
             };
             return RedirectToAction("Inicio");
         }
-
 
         [HttpGet]
         public IActionResult Eliminar(int? productoId)

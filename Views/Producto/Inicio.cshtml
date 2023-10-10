@@ -18,11 +18,10 @@
                     <label for="Categoria" class="form-label">Categoria:</label>
                     <select type="text" id="Categoria" name="Categoria" class="form-control">
                         <option value="">Seleccionar</option>
-                        <option value="1">Electrónicos</option>
-                        <option value="2">Alimentos</option>
-                        <option value="3">Moda</option>
-                        <option value="4">Hogar</option>
-                        <option value="5">Jardinería</option>
+                        @foreach (var categoria in (List<SelectListItem>)ViewData["Categorias"])
+                        {
+                            <option value="@categoria.Value">@categoria.Text</option>
+                        }
                     </select>
                 </div>          
                 

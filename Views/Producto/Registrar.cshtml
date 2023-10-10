@@ -32,12 +32,11 @@
                 <div class="mb-2">
                     <label class="form-label">Tipo Producto</label>
                     <select class="form-control" id="selectCategoria" required>
-                        <option value="">Seleccione</option>
-                        <option value="1">Electrónicos</option>
-                        <option value="2">Alimentos</option>
-                        <option value="3">Moda</option>
-                        <option value="4">Hogar</option>
-                        <option value="5">Jardinería</option>
+                        <option value="">Seleccionar</option>
+                        @foreach (var categoria in (List<SelectListItem>)ViewData["Categorias"])
+                        {
+                            <option value="@categoria.Value">@categoria.Text</option>
+                        }
                     </select>
                     <span for="CategoriaId" class="text-danger"></span>
                 </div>
@@ -104,17 +103,11 @@
                 <div class="mb-2">
                     <label class="form-check-label" for="textoProveedorModal">Proveedor</label>
                     <select class="form-control" id="textoProveedorModal" required>
-                        <option value="">Seleccione</option>
-                        <option value="1">Electronics Inc.</option>
-                        <option value="2">Foods Devils</option>
-                        <option value="3">Fashion ASFK</option>
-                        <option value="4">Home Deep</option>
-                        <option value="5">Greenday Inc</option>
-                        <option value="6">Electronics S.A. de C.B.</option>
-                        <option value="7">ANGELS FOOD</option>
-                        <option value="8">FASHION HOMI</option>
-                        <option value="9">HOME UP</option>
-                        <option value="10">REDDAY Inc</option>
+                        <option value="">Seleccionar</option>
+                        @foreach (var proveedor in (List<SelectListItem>)ViewData["Proveedor"])
+                        {
+                            <option value="@proveedor.Value">@proveedor.Text</option>
+                        }
                     </select>
                     <span id="errorProveedor" class="text-danger"></span>
                 </div>
@@ -185,6 +178,8 @@
         // Confirmar el proveedor desde el modal
         $("#botonConfirmarProveedor").on("click", function () {
             var proveedor = $("#textoProveedorModal").val();
+
+
             var claveProveedor = $("#textoClaveProveedorModal").val();
             var costoProveedor = $("#textoCostoProveedorModal").val();
 
@@ -250,6 +245,7 @@
                     console.log(data);
                     if (data.respuesta) {
                         alert("Producto creado con exito")
+                        window.location.href = "/Producto/Inicio";
                     }else {
                         alert("Producto Invalido")
                     }

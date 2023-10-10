@@ -1,6 +1,7 @@
 using EmpresaDistribuidora.Controllers;
 using EmpresaDistribuidora.Data;
 using EmpresaDistribuidora.Models;
+using EmpresaDistribuidora.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,8 @@ builder.Services.AddScoped<ProductoController>();
 builder.Services.AddControllers().AddJsonOptions(option => option.JsonSerializerOptions.PropertyNamingPolicy = null);
 
 builder.Services.Configure<Connection>(builder.Configuration.GetSection("ConnectionStrings"));
+
+builder.Services.AddScoped<ProductoService>();
 
 var app = builder.Build();
 
