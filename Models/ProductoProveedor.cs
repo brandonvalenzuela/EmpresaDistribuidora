@@ -10,7 +10,6 @@ namespace EmpresaDistribuidora.Models
         public string ClaveProveedor { get; set; }
         public decimal PrecioProveedor { get; set; }
 
-        // Propiedades de navegación
         public Producto Producto { get; set; }
         public Proveedor Proveedor { get; set; }
     }
