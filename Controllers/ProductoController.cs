@@ -153,8 +153,7 @@ namespace EmpresaDistribuidora.Controllers
                 connection.Open();
                 command.ExecuteNonQuery();
             };
-            return RedirectToAction("Inicio");
-
+            return RedirectToAction("Inicio"); 
         }
     }
 }

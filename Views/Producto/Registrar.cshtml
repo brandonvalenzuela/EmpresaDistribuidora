@@ -163,30 +163,25 @@
             return !error;
         }
 
-        // abrir el modal de agregar proveedor
         $("#buttonAgregarProveedor").on("click", function () {
 
-            // Limpiar campos del modal
             $("#textoProveedorModal").val("");
             $("#textoClaveProveedorModal").val("");
             $("#textoCostoProveedorModal").val("");
 
-            // Mostrar el modal
             $("#agregarProveedorModal").modal("show");
         });
 
-        // Confirmar el proveedor desde el modal
         $("#botonConfirmarProveedor").on("click", function () {
             var proveedor = $("#textoProveedorModal").val();
 
+            console.log("ID del proveedor seleccionado:", proveedorId);
 
             var claveProveedor = $("#textoClaveProveedorModal").val();
             var costoProveedor = $("#textoCostoProveedorModal").val();
 
-            // Validar campos
             if (validarCamposProveedor(proveedor, claveProveedor, costoProveedor)) {
 
-                // Agregar fila a la tabla de proveedores en el formulario principal
                 $("#tablaProveedores tbody").append(
                     $("<tr>").append(
                         $("<td>").text(proveedor),
@@ -194,7 +189,6 @@
                         $("<td>").text(costoProveedor),
                         $("<td>").append(
                             $("<button>").addClass("btn btn-danger").text("Eliminar").on("click", function () {
-                                // Eliminar la fila de proveedor
                                 $(this).closest("tr").remove();
                             })
                         )
@@ -205,7 +199,6 @@
                 $("#textoClaveProveedorModal").val("");
                 $("#textoCostoProveedorModal").val("");
 
-                // Cerrar el modal
                 $("#agregarProveedorModal").modal("hide");
             }
         });

@@ -1,6 +1,5 @@
 using EmpresaDistribuidora.Controllers;
 using EmpresaDistribuidora.Data;
-using EmpresaDistribuidora.Models;
 using EmpresaDistribuidora.Services;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -16,7 +16,6 @@ namespace EmpresaDistribuidora.Services
             _connection = connection.Value;
         }
 
-        // Métodos auxiliares para obtener categorías y proveedores desde la base de datos
         public List<SelectListItem> GetCategoriasFromDatabase()
         {
             using (SqlConnection connection = new(_connection.DefaultConnection))
@@ -26,7 +25,7 @@ namespace EmpresaDistribuidora.Services
                 connection.Open();
 
                 using SqlDataReader reader = command.ExecuteReader();
-                List<SelectListItem> categoriasList = new List<SelectListItem>();
+                List<SelectListItem> categoriasList = new();
                 while (reader.Read())
                 {
                     categoriasList.Add(new SelectListItem
@@ -49,7 +48,7 @@ namespace EmpresaDistribuidora.Services
                 connection.Open();
 
                 using SqlDataReader reader = command.ExecuteReader();
-                List<SelectListItem> proveedorList = new List<SelectListItem>();
+                List<SelectListItem> proveedorList = new();
                 while (reader.Read())
                 {
                     proveedorList.Add(new SelectListItem
@@ -65,7 +64,7 @@ namespace EmpresaDistribuidora.Services
 
         public XElement CreateProductoXml(Producto body)
         {
-            XElement producto = new XElement("Producto",
+            XElement producto = new("Producto",
                    new XElement("NombreProducto", body.NombreProducto),
                    new XElement("Clave", body.Clave),
                    new XElement("CategoriaId", body.CategoriaId),
