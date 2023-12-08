@@ -35,9 +35,51 @@
 
                 <div class="form-check">
                     <label class="form-check-label" for="EsActivo">Es Activo</label>
-                    <input class="form-check-input" type="checkbox" asp-for="EsActivo" required />
+                    <input class="form-check-input" type="checkbox" asp-for="EsActivo"/>
                     <span asp-validation-for="EsActivo" class="text-danger"></span>
                 </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table" id="tablaProveedores">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Proveedor</th>
+                                    <th scope="col">Clave Proveedor</th>
+                                    <th scope="col">Costo</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                @section Scripts{
+                    <script>
+
+                       <div class="col-sm-12">
+                           <table class="table" id="tablaProveedoresAsociados">
+                               <thead>
+                                   <tr>
+                                       <th scope="col">Proveedor</th>
+                                       <th scope="col">Clave Proveedor</th>
+                                       <th scope="col">Costo</th>
+                                   </tr>
+                               </thead>
+                               <tbody>
+                                 
+                               </tbody>
+                           </table>
+                       </div>
+
+
+                    </script>
+                }
+
+
 
                 <Button type="submit" asp-action="Editar" class="btn btn-success">Guardar</Button>
                 <a asp-action="Inicio" class="btn btn-warning">Volver</a>
@@ -45,3 +87,5 @@
         </div>
     </div>
 </div>
+
+

@@ -19,9 +19,9 @@ namespace EmpresaDistribuidora.Services
         public List<SelectListItem> GetCategoriasFromDatabase()
         {
             using (SqlConnection connection = new(_connection.DefaultConnection))
-            using (SqlCommand command = new("SELECT CategoriaId, NombreCategoria FROM Categoria", connection))
+            using (SqlCommand command = new("[sp_Read_Categorias]", connection))
             {
-                command.CommandType = CommandType.Text;
+                command.CommandType = CommandType.StoredProcedure;
                 connection.Open();
 
                 using SqlDataReader reader = command.ExecuteReader();
@@ -42,9 +42,9 @@ namespace EmpresaDistribuidora.Services
         public List<SelectListItem> GetProveedoresFromDatabase()
         {
             using (SqlConnection connection = new(_connection.DefaultConnection))
-            using (SqlCommand command = new("SELECT ProveedorId, NombreProveedor FROM Proveedor", connection))
+            using (SqlCommand command = new("[sp_Read_Proveedor]", connection))
             {
-                command.CommandType = CommandType.Text;
+                command.CommandType = CommandType.StoredProcedure;
                 connection.Open();
 
                 using SqlDataReader reader = command.ExecuteReader();
@@ -60,7 +60,7 @@ namespace EmpresaDistribuidora.Services
 
                 return proveedorList;
             }
-        }
+        }   
 
         public XElement CreateProductoXml(Producto body)
         {

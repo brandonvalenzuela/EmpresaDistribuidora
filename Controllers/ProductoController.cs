@@ -33,9 +33,9 @@ namespace EmpresaDistribuidora.Controllers
             productoList = new();
 
             using (SqlConnection connection = new(_connection.DefaultConnection))
-            using (SqlCommand command = new("SELECT * FROM Producto", connection))
+            using (SqlCommand command = new("[sp_Read_Productos]", connection))
             {
-                command.CommandType = CommandType.Text;
+                command.CommandType = CommandType.StoredProcedure;
                 connection.Open();
 
                 using SqlDataReader reader = command.ExecuteReader();
@@ -109,8 +109,8 @@ namespace EmpresaDistribuidora.Controllers
 
             Producto producto = productoList.Where(c => c.ProductoId == productoId).FirstOrDefault();
 
-
             return View(producto);
+
         }
 
         [HttpPost]
@@ -123,11 +123,13 @@ namespace EmpresaDistribuidora.Controllers
                 command.Parameters.AddWithValue("NombreProducto", producto.NombreProducto);
                 command.Parameters.AddWithValue("Clave", producto.Clave);
                 command.Parameters.AddWithValue("Precio", producto.Precio);
+                command.Parameters.AddWithValue("EsActivo", producto.EsActivo);
 
                 command.CommandType = CommandType.StoredProcedure;
                 connection.Open();
                 command.ExecuteNonQuery();
             };
+
             return RedirectToAction("Inicio");
         }
 
